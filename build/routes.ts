@@ -7,6 +7,8 @@ import { AddressbookController } from './../src/addressbook/AddressbookControlle
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { AdminController } from './../src/admin/AdminController';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { CredentialsController } from './../src/credentials/CredentialsController';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { DidController } from './../src/did/DidController';
 import type { RequestHandler, Router } from 'express';
 
@@ -49,6 +51,15 @@ const models: TsoaRoute.Models = {
     "APPLICATION_STATUS": {
         "dataType": "refEnum",
         "enums": ["INITIALIZING","ERROR","OK"],
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "IssueVCParams": {
+        "dataType": "refObject",
+        "properties": {
+            "credential": {"dataType":"any","required":true},
+            "options": {"dataType":"nestedObjectLiteral","nestedProperties":{},"required":true},
+        },
+        "additionalProperties": false,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "PublicKey": {
@@ -175,6 +186,56 @@ export function RegisterRoutes(app: Router) {
 
 
               const promise = controller.getVerboseStatus.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.post('/credentials/issue',
+            ...(fetchMiddlewares<RequestHandler>(CredentialsController)),
+            ...(fetchMiddlewares<RequestHandler>(CredentialsController.prototype.issueVerifiableCredential)),
+
+            function CredentialsController_issueVerifiableCredential(request: any, response: any, next: any) {
+            const args = {
+                    undefined: {"in":"body","required":true,"ref":"IssueVCParams"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new CredentialsController();
+
+
+              const promise = controller.issueVerifiableCredential.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.get('/credentials/:credentialId',
+            ...(fetchMiddlewares<RequestHandler>(CredentialsController)),
+            ...(fetchMiddlewares<RequestHandler>(CredentialsController.prototype.getCredentialById)),
+
+            function CredentialsController_getCredentialById(request: any, response: any, next: any) {
+            const args = {
+                    credentialId: {"in":"path","name":"credentialId","required":true,"dataType":"string"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new CredentialsController();
+
+
+              const promise = controller.getCredentialById.apply(controller, validatedArgs as any);
               promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);
